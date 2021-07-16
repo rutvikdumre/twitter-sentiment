@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static',filename='fonts/icomoon/style.css')}}">
+
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/owl.carousel.min.css')}}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css')}}">
+    
+    <!-- Style -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+
+    <title>Tweets</title>
+    <style>
+    </style>
+  </head>
+  <body>
+  
+
+  <div class="content">
+    
+    <div class="container">
+      <h1 style="color: white;" class="mb-5">Search results from Twitter</h1>
+      <h2>Sentiment count:</h2>
+      <div class="table-responsive custom-table-responsive">
+        {% if pos==0 and neg==0 and neu==0 %}
+        <h2 style="color: red;">No results found. Try reducing search parameters</h2>
+        {% endif %}
+        
+        <table class="table custom-table">
+          <thead>
+            <th>Positive tweets</th>
+            <th>Negative tweets</th>
+            <th>Neutral tweets</th>
+          </thead>
+          <tbody>
+          <td>{{ pos }}</td>
+          <td>{{ neg }}</td>
+          <td>{{ neu }}</td>  
+          </tbody>
+        </table>
+        <h2>All information:</h2>
+        <div class="dropdown">
+          <form method="POST">
+          <label style="color: white;margin-right: 2%;" for="Sentiment">Choose a Sentiment:</label>
+          <select style="margin: 3%; border-radius: 12%;" name="Sentiment" id="Sentiment">
+            <option value="All">All</option>
+            <option value="Positive">Positive</option>
+            <option value="Negative">Negative</option>
+            <option value="Neutral">Neutral</option>
+          </select>
+          <input style="margin: 3%; border-radius: 12%;" type="submit">
+        </form>
+        </div>
+        
+        <table class="table custom-table">
+          <thead>
+            <tr>  
+              {% for header in headings %}
+              <th scope="col">{{ header }}</th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+              {% for row in data %}
+              {% set count = 0 %}
+              <tr> 
+                {% for item in row %}
+                {% if loop.index0 == 0 %}
+                {% set count = 1 %}
+                <td><a target="_blank" href="/user/{{ item }}">{{ item }}</a></td>
+                {% else %}
+                <td>{{ item }}</td>
+                {% endif %}
+                {% endfor %}
+              </tr>
+              {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+
+    </div>
+
+  </div>
+    
+    
+
+    <script src="{{ url_for('static',filename='js/jquery-3.3.1.min.js')}}"></script>
+    <script src="{{ url_for('static',filename='js/popper.min.js')}}"></script>
+    <script src="{{ url_for('static',filename='js/bootstrap.min.js')}}"></script>
+    <script src="{{ url_for('static',filename='js/main.js')}}"></script>
+  </body>
+</html>

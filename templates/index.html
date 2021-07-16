@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+
+
+    <title>DMA - EY</title>
+    <style type="text/css">
+        .col-md-8{
+            background-image: url("logo.jpg");
+        }
+    
+    </style>
+    <link rel='shortcut icon' href='static/favicon.png' type='image/png' />
+    <script>
+        function myFunction() {
+  /* Get the text field */
+  var copyText = document.getElementById("myInput");
+
+  /* Select the text field */
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+  /* Copy the text inside the text field */
+  document.execCommand("copy");
+
+  /* Alert the copied text */
+  alert("Copied the text: " + copyText.value);
+}
+    </script>
+
+</head>
+
+<body class="px-5 py-5">
+      
+    <section id="showcase" class="pb-5 pt-5">
+    <div class="primary-overlay text-white">
+      <div class="container-fluid">
+        <div class="row text-dark align-items-center">
+          <div class="col-lg-8 offset-md-2 text-center" >
+            <img src="{{ url_for('static', filename='logo.jpg')}}" alt="" class="img-fluid d-none d-lg-inline" style="max-height: 20rem;">
+            <img src="{{ url_for('static', filename='logo.jpg')}}" alt="" class="img-fluid d-lg-none d-sm-inline d-none" style="max-height: 15rem;">
+            <img src="{{ url_for('static', filename='logo.jpg')}}" alt="" class="img-fluid d-sm-none d-inline mx-auto" style="max-height: 10rem;">
+            <h1>EY - Digital Media Analysis</h1>
+            <h2>Get keywords from PDF</h2>
+        </div>
+          </div>
+      </div>
+    </div>
+  </section>
+  <div class="row">
+                <div class="col-md-4 offset-md-4">
+                    
+            <form method=post enctype=multipart/form-data class="my-5">
+                <div class="custom-file mt-1 mb-5">
+                        <input type="file" id="myfile" class="custom-file-input" name=file>
+                        <label class="custom-file-label" for="myfile">Upload PDF</label>
+                    </div>
+                    <script>
+                      document.querySelector('.custom-file-input').addEventListener('change',function(e){
+                      var fileName = document.getElementById("myfile").files[0].name;
+                      var nextSibling = e.target.nextElementSibling
+                      nextSibling.innerText = fileName
+                    })
+                    </script>
+                <div class="d-flex justify-content-center ">
+                    <div class="btn-group">
+                        
+                        <button class="btn btn-dark px-5" type=submit value=encrypt name="go">Get keywords</button><br>
+                        
+                 </div>
+                    </div><br>
+                    <div class="d-flex justify-content-center ">
+                        <div class="btn-group">
+                            
+                  
+                             <!-- The text field -->
+                     <textarea style="text-align: center;" type="text"  id="myInput"  rows="4" cols="50">{{keywords}}</textarea>
+    
+                     <!-- The button used to copy the text -->
+                     
+                     </div>
+                        </div><br>
+                        <div class="d-flex justify-content-center ">
+                            <div class="btn-group">
+                                
+                      
+                         <!-- The button used to copy the text -->
+                         <button class="btn btn-dark px-5" style="text-align: center;" onclick="myFunction()">Copy text</button>
+                         </div>
+                            </div><br>
+
+                            <div class="d-flex justify-content-center ">
+                              <div class="btn-group">
+                                  
+                        
+                           <!-- The button used to copy the text -->
+                           <a href="/scrap">Search Tweets</a>
+                           
+                    
+
+                   
+            </form>
+                </div>
+                
+            </div>
+            <div>
+                
+                <br>
+               
+               
+            </div>
+            <table> {{error}} </table>
+           
+        
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Welcome to Stego Chat!</h5>
+                  <button class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  Stego Chat is a free online Image Steganography application.
+                  Upload the image and hide whatever message you wish to.
+                  Decode an encoded image and see what hidden message awaits you!
+                  <br>
+                  Check it out on <a href="https://github.com/rutvikdumre/" target="_blank">GitHub-rutvikdumre</a>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal" id="myModal1">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Send invisble messages!</h5>
+                  <button class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <h5>Send invisible messages:</h5>
+                  <ol>
+                    <li>Upload an image</li>
+                    <li>Press the 'Hide' button</li>
+                  </ol>
+                  <br><br>
+                  <h5>Read invisible messages:</h5>
+                  <ol>
+                    <li>Upload an image</li>
+                    <li>Press the 'Unhide' button</li>
+                  </ol>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+          <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+          crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+          crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+          crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
