@@ -46,8 +46,8 @@
             <img src="{{ url_for('static', filename='logo.jpg')}}" alt="" class="img-fluid d-none d-lg-inline" style="max-height: 20rem;">
             <img src="{{ url_for('static', filename='logo.jpg')}}" alt="" class="img-fluid d-lg-none d-sm-inline d-none" style="max-height: 15rem;">
             <img src="{{ url_for('static', filename='logo.jpg')}}" alt="" class="img-fluid d-sm-none d-inline mx-auto" style="max-height: 10rem;">
-            <h1>EY - Digital Media Analysis</h1>
-            <h2>Search articles on twitter</h2>
+            <h1>FYP - Twitter Prototype</h1>
+            <h2>Data from Twitter API</h2>
         </div>
           </div>
       </div>
@@ -57,35 +57,18 @@
                 <div class="col-md-4 offset-md-4">
                     
             <form method=post enctype=multipart/form-data class="my-5">
-                    <div class="d-flex justify-content-center ">
-                        <div class="btn-group">
-
-                             <!-- The text field -->
-                     <textarea style="text-align: center;" type="text" required placeholder="Enter Keywords (Best works with 3)" name="keywords"  rows="4" cols="50">{{keywords}}</textarea>
-
-                          
-                    </div>
-                </div><br>
+                    
                 <form method=post enctype=multipart/form-data class="my-5">
                   <div class="d-flex justify-content-center ">
                       <div class="btn-group">
 
                            <!-- The text field -->
-                           <input name=uid placeholder="Relevant usernames">
+                           <input name=uid placeholder="Enter Topic">
 
                         
                   </div>
               </div><br>
-              <form method=post enctype=multipart/form-data class="my-5">
-                <div class="d-flex justify-content-center ">
-                    <div class="btn-group">
-                   
-                        
-                        <input name=hashtags placeholder="hashtags">
-
-                      
-                </div>
-            </div><br>
+              
 
                      <div class="d-flex justify-content-center ">
                         <div class="btn-group">

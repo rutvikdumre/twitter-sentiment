@@ -19,7 +19,7 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/pdf', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
         # check if the post request has the file part
@@ -38,7 +38,7 @@ def upload_file():
             return render_template('index.html', error='Please upload a PDF file',keywords='keywords')
     return render_template('index.html', keywords='keywords')
 
-@app.route('/scrap', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def scraper():
     if request.method=='POST':
         q= str(request.form.get('keywords'))
