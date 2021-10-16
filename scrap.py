@@ -6,6 +6,7 @@ import pandas as pd
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import matplotlib.pyplot as plt
 import tweepy
+from googletrans import Translator
 
 # function to print sentiments
 # of the sentence.
@@ -19,13 +20,13 @@ def sentiment_scores(sentence):
     # which contains pos, neg, neu, and compound scores.
     sentiment_dict = sid_obj.polarity_scores(sentence)
       
-    print("Overall sentiment dictionary is : ", sentiment_dict)
+    '''print("Overall sentiment dictionary is : ", sentiment_dict)
     print("sentence was rated as ", sentiment_dict['neg']*100, "% Negative")
     print("sentence was rated as ", sentiment_dict['neu']*100, "% Neutral")
     print("sentence was rated as ", sentiment_dict['pos']*100, "% Positive")
   
     print("Sentence Overall Rated As", end = " ")
-  
+  '''
     # decide sentiment as positive, negative and neutral
     if sentiment_dict['compound'] >= 0.05 :
         return "Positive"
@@ -65,7 +66,7 @@ def twitter_query(query):
             }
 
     # Search tweets
-    dict_ = {'user': [], 'date': [], 'text': [], 'favorite_count': [], 'hashtags':[], 'location':[]}
+    dict_ = {'user': [], 'date': [], 'text': [], 'favorite_count': [], 'hashtags':[], 'location':[], 'language':[]}
     for status in python_tweets.search(**query)['statuses']:
         dict_['user'].append(status['user']['screen_name'])
         dict_['date'].append(status['created_at'])
@@ -73,6 +74,7 @@ def twitter_query(query):
         dict_['favorite_count'].append(status['favorite_count'])
         dict_['hashtags'].append([hashtag['text'] for hashtag in status['entities']['hashtags']])
         dict_['location'].append(status['user']['location'])
+        dict_['language'].append('en')
 
     # Structure data in a pandas DataFrame for easier manipulation
     df = pd.DataFrame(dict_)
@@ -93,7 +95,7 @@ def twitter_query(query):
         neu=df['sentiment'].value_counts()['Neutral']
     except:
         neu=0
-    print(df.shape)
+    #print(df.shape)
     return df,pos,neg,neu
 
 
@@ -123,6 +125,32 @@ def getinfo(name):
     user = api.get_user(screen_name)
     return user._json
     
+def langdetect(text_content):
+    
+    translator = Translator()
+    text_content= text_content.split()
+    ans=''
+    for i in text_content:
+        if translator.detect(i).lang != 'en':
+            ans= translator.detect(i).lang
+        else:
+            #print('en')
+             
+            return ans
+    
+    
+def translate(tweet):
+    
+    translator = Translator()
+    text_content= tweet.split()
+    ans=''
+    '''for i in text_content:
+        translation = translator.translate(i, dest='en')
+        ans+=' '+translation.text'''
+    #print("Translation by Google Translate:",translator.translate(tweet, dest='en').text)
+    #print("Translation by Proposed Method:", ans)
+    return ans
+    
     
 '''def sentplot(df):
     fig, ax = plt.subplots()
@@ -130,3 +158,5 @@ def getinfo(name):
     return fig'''
 #twitter_credentials()
 #twitter_query('Rajya Lok Sabha Public Budget Demands February', 'mixed')
+
+#print(langdetect("chalo chalte hai"))
